@@ -10,11 +10,13 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from '@src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { CoreModule } from './core/core.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CoreModule,
     StoreModule.forRoot({}, {}),
     BrowserAnimationsModule,
     EffectsModule.forRoot([]),

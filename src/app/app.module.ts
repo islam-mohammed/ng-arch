@@ -11,18 +11,29 @@ import { environment } from '@src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CoreModule } from './core/core.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './store/reducers';
+import { AngularMaterialModule } from './material.module';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
+    AngularMaterialModule,
     StoreModule.forRoot({}, {}),
     BrowserAnimationsModule,
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase.config),
     AngularFireAuthModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreModule.forRoot(reducers),
   ],
   providers: [],
   bootstrap: [AppComponent],
